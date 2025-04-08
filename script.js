@@ -59,3 +59,22 @@ function addTask() {
   }
   
   loadTasks();
+
+  li.addEventListener("dblclick", () => {
+    const input = document.createElement("input");
+    input.type = "text";
+    input.value = li.textContent;
+    input.className = "edit-input";
+  
+    li.textContent = ""; // Clear old text
+    li.appendChild(input);
+    input.focus();
+  
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        li.textContent = input.value.trim();
+        li.classList.remove("completed"); // optional: remove completed on edit
+        saveTasks();
+      }
+    });
+  });
